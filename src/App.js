@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Table from "react-bootstrap/Table";
+import Search from "./components/Search";
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +9,10 @@ class App extends Component {
     this.state = {
       users: [],
       displayedUsers: [],
+      value: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.filterNames = this.filterNames.bind(this);
   }
 
   componentDidMount() {
@@ -29,16 +33,32 @@ class App extends Component {
     this.setState({ displayedUsers });
   };
 
-    // TODO: Create search box and filter feature.
+  filterNames = () => {
+    const displayedUsers = this.state.users.filter((user) =>
+      user.name.first.toLowerCase().includes(this.state.value.toLowerCase())
+    );
+    this.setState({ displayedUsers });
+  };
+
+  handleChange(event) {
+    this.setState({ value: event.target.value }, () => {
+      this.filterNames();
+    });
+  }
 
   render() {
     return (
       <div className="App">
+        <Search value={this.state.value} handleChange={this.handleChange} />
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th onClick={() => this.sortUsers("name", "first")}>First (sort)</th>
-              <th onClick={() => this.sortUsers("name", "last")}>Last (sort)</th>
+              <th onClick={() => this.sortUsers("name", "first")}>
+                First (sort)
+              </th>
+              <th onClick={() => this.sortUsers("name", "last")}>
+                Last (sort)
+              </th>
               <th onClick={() => this.sortUsers("location", "country")}>
                 Country (sort)
               </th>
