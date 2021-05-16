@@ -47,6 +47,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h2>Employee Directory</h2>
         <Search value={this.state.value} handleChange={this.handleChange} />
         <Table striped bordered hover>
           <thead>

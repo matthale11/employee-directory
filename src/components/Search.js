@@ -5,7 +5,7 @@ class Search extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Search</h2>
+        <h3>Search by first name: </h3>
         <input
           type="text"
           value= {this.props.value}
