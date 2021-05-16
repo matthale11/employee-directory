@@ -11,8 +11,6 @@ class App extends Component {
       displayedUsers: [],
       value: "",
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.filterNames = this.filterNames.bind(this);
   }
 
   componentDidMount() {
@@ -40,11 +38,11 @@ class App extends Component {
     this.setState({ displayedUsers });
   };
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value }, () => {
       this.filterNames();
     });
-  }
+  };
 
   render() {
     return (
